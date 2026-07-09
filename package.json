@@ -1,0 +1,28 @@
+{
+  "name": "erp-query-mcp",
+  "version": "1.0.0",
+  "description": "MCP server that lets an LLM answer plain-English questions against a manufacturing ERP database (demo, read-only)",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "seed": "node scripts/seed.js",
+    "start": "node src/index.js",
+    "test": "node --test test/db.test.js"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "sql",
+    "natural-language",
+    "erp",
+    "sqlite"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">=22.5.0"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "zod": "^3.23.0"
+  }
+}
