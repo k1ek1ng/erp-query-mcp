@@ -53,11 +53,18 @@ context window and accomplish nothing.
 
 ## The production version did the opposite, on purpose
 
-I built a version of this against a real manufacturing ERP during an internship.
-That one has **no free-form SQL surface at all**. Every tool maps to one
-hand-written SELECT — revenue for a period, top customers, open orders, AR aging,
-work orders at risk. It is read-only by construction: there is no code path that
-writes and no place to inject.
+I built a version of this against a real manufacturing ERP during an internship,
+and 10 executives, including the CEO and CFO, use it. That one has **no
+free-form SQL surface at all**. Each of its 36 tools maps to one hand-written
+SELECT: revenue for a period, top customers, open orders, AR and AP aging, material
+shortages, purchase price variance. It is read-only by construction: there is no
+code path that writes and no place to inject.
+
+It also has what this repo lacks. The first version identified callers with a
+self-declared header, which was fine for attributing a query and useless for
+gating one, since anyone who could reach the server could claim any name. The
+production version issues each person a secret token checked against an
+allowlist, and every call writes one line to an append-only audit log.
 
 The trade is real. A fixed menu cannot answer a question nobody anticipated, and
 every new question costs a code change. Free-form SQL answers anything and puts
@@ -94,6 +101,6 @@ Claude Desktop (`claude_desktop_config.json`):
 ## What is missing before this is production-shaped
 
 Auth, query logging, per-caller result budgets, and a timeout on the query itself
-— a model can write a cartesian join as easily as a good query. None are here.
+(a model can write a cartesian join as easily as a good query). None are here.
 
 Node.js >= 22.5, `@modelcontextprotocol/sdk`, `node:sqlite`, zod, `node:test`. MIT.
