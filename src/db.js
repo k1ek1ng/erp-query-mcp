@@ -36,7 +36,7 @@ export function validateQuery(sql) {
 }
 
 export function openDb(dbPath = DB_PATH) {
-  // readOnly means SQLite itself will refuse writes — defense in depth
+  // readOnly means SQLite itself will refuse writes (defense in depth)
   // on top of validateQuery().
   return new DatabaseSync(dbPath, { readOnly: true });
 }

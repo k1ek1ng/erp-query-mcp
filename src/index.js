@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * erp-query-mcp — an MCP server that lets an LLM answer plain-English
+ * erp-query-mcp: an MCP server that lets an LLM answer plain-English
  * questions against a manufacturing ERP database.
  *
  * The model does the natural-language → SQL translation; this server
